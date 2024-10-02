@@ -10,7 +10,7 @@ build:
 
 # Deployment Configuration
 deploy:
-  enabled: true                    # Flag to enable deployment
+  enabled: false                    # Flag to enable deployment
   environment: "production"        # Deployment environment (production/staging)
   kubernetes:
     namespace: "my-namespace"      # Kubernetes namespace for deployment
