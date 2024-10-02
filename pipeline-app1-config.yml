@@ -1,0 +1,67 @@
+# External configuration for the Jenkins pipeline
+
+# General Build Configuration
+build:
+  skipTests: false                 # Flag to skip tests
+  runTests: true                   # Flag to run tests
+  testSuites:
+    - "Suite1"                     # List of test suites to run
+    - "Suite2"
+
+# Deployment Configuration
+deploy:
+  enabled: true                    # Flag to enable deployment
+  environment: "production"        # Deployment environment (production/staging)
+  kubernetes:
+    namespace: "my-namespace"      # Kubernetes namespace for deployment
+    deploymentName: "my-app"       # Deployment name
+    replicas: 3                     # Number of replicas
+    containerImage: "my-app:latest" # Docker image for deployment
+    serviceName: "my-app-service"  # Kubernetes service name
+
+# Docker Configuration
+docker:
+  image: "maven:3.6.3-jdk-11"      # Docker image to use for builds
+  registry: "docker.io"            # Docker registry
+  credentialsId: "docker-creds"    # Jenkins credentials ID for Docker registry
+  push: true                        # Flag to enable pushing the image to the registry
+
+# Java Configuration
+java:
+  version: "11"                    # Java version for the build
+  options: "-Xmx1024m"             # Java options for memory management
+  maven:
+    goals: "clean package"         # Maven goals to execute
+    settingsFile: "path/to/settings.xml" # Custom settings file for Maven
+
+# Jenkins Configuration
+jenkins:
+  agent: "my-slave-agent"          # Jenkins agent/slave to use
+  jenkinsfile: "Jenkinsfile"       # Path to Jenkinsfile
+  notifications:
+    email: "notify@example.com"     # Email for build notifications
+    slackWebhook: "https://hooks.slack.com/services/..." # Slack webhook for alerts
+
+# Test Configuration
+tests:
+  parallelExecution: true           # Flag to enable parallel test execution
+  timeout: 300                      # Timeout for tests in seconds
+
+# Security Configuration
+security:
+  credentialsId: "my-credentials"  # Jenkins credentials ID for accessing secure resources
+  enableSonarQube: true             # Flag to enable SonarQube integration
+  sonarQube:
+    serverUrl: "https://sonarqube.example.com"
+    projectKey: "my-project-key"
+    credentialsId: "sonar-creds"   # Jenkins credentials for SonarQube
+
+# Environment Variables
+environment:
+  ENV_VAR1: "value1"               # Custom environment variable 1
+  ENV_VAR2: "value2"               # Custom environment variable 2
+
+# Cleanup Configuration
+cleanup:
+  enabled: true                     # Flag to enable cleanup steps
+  timeout: 600                      # Timeout for cleanup steps in seconds
